@@ -4,7 +4,7 @@
     package="com.example.kksmartcontrol"
     android:installLocation="preferExternal"
     android:versionCode="2"
-    android:versionName="v2.0.0" >
+    android:versionName="v2.0.0">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -22,13 +22,14 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppBaseTheme" >
+        android:theme="@style/AppBaseTheme">
         <activity
             android:name="com.kksmartcontrol.activity.SplashActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,16 +40,16 @@
             android:name="com.kksmartcontrol.activity.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
         <activity
             android:name="com.kksmartcontrol.activity.HelpActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
     </application>
 
 </manifest>

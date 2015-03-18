@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/KKSmart.iml" filepath="$PROJECT_DIR$/KKSmart.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/ijkplayer/ijkplayer.iml" filepath="$PROJECT_DIR$/libs/ijkplayer/ijkplayer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kksmartcontrol.iml" filepath="$PROJECT_DIR$/kksmartcontrol.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/libs.iml" filepath="$PROJECT_DIR$/libs/libs.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/matchview/matchview.iml" filepath="$PROJECT_DIR$/libs/matchview/matchview.iml" />
     </modules>
