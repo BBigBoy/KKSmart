@@ -50,7 +50,7 @@
                 android:textColor="@color/dialog_font"
                 android:textSize="16sp" />
 
-            <com.kksmartcontrol.util.NumberSeekBar
+            <com.kksmartcontrol.view.NumberSeekBar
                 android:id="@+id/colorRseekbar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 android:textColor="@color/dialog_font"
                 android:textSize="16sp" />
 
-            <com.kksmartcontrol.util.NumberSeekBar
+            <com.kksmartcontrol.view.NumberSeekBar
                 android:id="@+id/colorGseekbar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                 android:textColor="@color/dialog_font"
                 android:textSize="16sp" />
 
-            <com.kksmartcontrol.util.NumberSeekBar
+            <com.kksmartcontrol.view.NumberSeekBar
                 android:id="@+id/colorBseekbar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"

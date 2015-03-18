@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white" >
 
-    <com.xlistview.xlistview.XListView
+    <com.kksmartcontrol.view.xlistview.xlistview.XListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +23,7 @@
         android:textSize="30.0dip"
         android:visibility="invisible" />
 
-    <com.xlistview.sidebar.SideBar
+    <com.kksmartcontrol.view.xlistview.sidebar.SideBar
         android:id="@+id/sidrbar"
         android:layout_width="20.0dip"
         android:layout_height="wrap_content"

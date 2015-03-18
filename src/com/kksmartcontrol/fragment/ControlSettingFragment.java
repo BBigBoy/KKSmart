@@ -1,17 +1,5 @@
 package com.kksmartcontrol.fragment;
 
-import com.example.kksmartcontrol.R;
-import com.glh.montagecontrol.net.client.NetState;
-import com.kksmartcontrol.activity.MainActivity;
-import com.kksmartcontrol.bean.KKSmartControlDataBean;
-import com.kksmartcontrol.net.NetWorkObject;
-import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
-import com.kksmartcontrol.netcmd.SetPJ_Infor;
-import com.kksmartcontrol.preference.PreferencesUtils;
-import com.kksmartcontrol.util.FragmentUtil;
-import com.kksmartcontrol.util.PjScreenViewInterface;
-import com.kksmartcontrol.util.ToastUtil;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -19,11 +7,23 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.kksmartcontrol.R;
+import com.glh.montagecontrol.net.client.NetState;
+import com.kksmartcontrol.activity.MainActivity;
+import com.kksmartcontrol.bean.KKSmartControlDataBean;
+import com.kksmartcontrol.fragment.util.FragmentUtil;
+import com.kksmartcontrol.net.NetWorkObject;
+import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
+import com.kksmartcontrol.net.netcmd.SetPJ_Infor;
+import com.kksmartcontrol.preference.PreferencesUtils;
+import com.kksmartcontrol.util.ToastUtil;
+import com.kksmartcontrol.view.pjscreenview.PJScreenView;
 
 public class ControlSettingFragment extends Fragment implements OnClickListener {
 	EditText setRow = null;
@@ -34,14 +34,14 @@ public class ControlSettingFragment extends Fragment implements OnClickListener 
 			set_sleepBtn, set_wake;
 	Context context = null;
 	SetPJ_Infor setPJ_Infor = null;// 设置拼接屏拼命令对象
-	PjScreenViewInterface pjScreenView;
+	PJScreenView pjScreenView;
 
 	@Override
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
 		context = activity;
-		pjScreenView = ((MainActivity) getActivity());
+		pjScreenView = ((MainActivity) getActivity()).pjScreenView;
 		setPJ_Infor = SetPJ_Infor.getInstance();
 	}
 
@@ -198,7 +198,7 @@ public class ControlSettingFragment extends Fragment implements OnClickListener 
 			fragmentTransaction.hide(videoPreFragment);
 			fragmentTransaction.commit();
 		}
-		pjScreenView.setPJSplicesMode(rowNum, columnNum);
+		pjScreenView.setSplicesMode(rowNum, columnNum);
 	}
 
 	/**

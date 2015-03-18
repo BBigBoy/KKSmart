@@ -3,7 +3,7 @@ package com.kksmartcontrol.activity;
 import java.util.ArrayList;
 import com.example.kksmartcontrol.R;
 import com.kksmartcontrol.preference.MySharedPreferences;
-import com.kksmartcontrol.util.ViewPagerAdapter;
+import com.kksmartcontrol.adapter.ViewPagerAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

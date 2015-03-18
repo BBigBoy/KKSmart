@@ -2,7 +2,7 @@ package com.kksmartcontrol.fragment;
 
 import com.example.kksmartcontrol.R;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
-import com.kksmartcontrol.util.EditText_EditorActionListener;
+import com.kksmartcontrol.view.EditText_EditorActionListener;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;

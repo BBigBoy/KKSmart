@@ -1,26 +1,26 @@
 package com.kksmartcontrol.fragment;
 
-import com.example.kksmartcontrol.R;
-import com.glh.montagecontrol.net.client.NetState;
-import com.kksmartcontrol.activity.MainActivity;
-import com.kksmartcontrol.net.NetWorkObject;
-import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
-import com.kksmartcontrol.netcmd.SetPJ_Infor;
-import com.kksmartcontrol.preference.PreferencesUtils;
-import com.kksmartcontrol.util.PjScreenViewInterface;
-
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
+
+import com.example.kksmartcontrol.R;
+import com.glh.montagecontrol.net.client.NetState;
+import com.kksmartcontrol.activity.MainActivity;
+import com.kksmartcontrol.net.NetWorkObject;
+import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
+import com.kksmartcontrol.net.netcmd.SetPJ_Infor;
+import com.kksmartcontrol.preference.PreferencesUtils;
+import com.kksmartcontrol.view.pjscreenview.PJScreenView;
 
 public class AdjustRGBFragment extends Fragment implements
 		OnSeekBarChangeListener, OnClickListener {
@@ -32,14 +32,14 @@ public class AdjustRGBFragment extends Fragment implements
 	int colorGValue;
 	int colorBValue;
 	SeekBar RGainBar, GGainBar, BGainBar;
-	PjScreenViewInterface coordinateList;
+	PJScreenView pjScreenView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		context = getActivity();
-		coordinateList = ((MainActivity) getActivity());
+		pjScreenView = ((MainActivity) getActivity()).pjScreenView;
 		View layoutView = inflater
 				.inflate(R.layout.adjustrgb, container, false);
 		((TextView) layoutView.findViewById(R.id.fragmenttitletext))
@@ -97,7 +97,7 @@ public class AdjustRGBFragment extends Fragment implements
 				public void run() {
 					// TODO Auto-generated method stub
 					setPj_Infor.adjustColorMode(
-							coordinateList.getCoordinateList(),
+							pjScreenView.getCoordinateList(),
 							SystemFuntion.SET_COLORMODE_R, (byte) 0x31,
 							(byte) 0x00, (byte) 0x06, (byte) colorRValue,
 							(byte) colorGValue, (byte) colorBValue,
@@ -148,21 +148,21 @@ public class AdjustRGBFragment extends Fragment implements
 		// TODO Auto-generated method stub
 		switch (seekBar.getId()) {
 		case R.id.colorRseekbar:
-			setPj_Infor.adjustColorMode(coordinateList.getCoordinateList(),
+			setPj_Infor.adjustColorMode(pjScreenView.getCoordinateList(),
 					SystemFuntion.SET_COLORMODE_R, (byte) 0x31, (byte) 0x00,
 					(byte) 0x06, (byte) colorRValue, (byte) colorGValue,
 					(byte) colorBValue, (byte) 0x80, (byte) 0x80, (byte) 0x80);
 			Log.i("DialogViewInit", "Rseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.colorGseekbar:
-			setPj_Infor.adjustColorMode(coordinateList.getCoordinateList(),
+			setPj_Infor.adjustColorMode(pjScreenView.getCoordinateList(),
 					SystemFuntion.SET_COLORMODE_G, (byte) 0x31, (byte) 0x00,
 					(byte) 0x06, (byte) colorRValue, (byte) colorGValue,
 					(byte) colorBValue, (byte) 0x80, (byte) 0x80, (byte) 0x80);
 			Log.i("DialogViewInit", "Gseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.colorBseekbar:
-			setPj_Infor.adjustColorMode(coordinateList.getCoordinateList(),
+			setPj_Infor.adjustColorMode(pjScreenView.getCoordinateList(),
 					SystemFuntion.SET_COLORMODE_B, (byte) 0x31, (byte) 0x00,
 					(byte) 0x06, (byte) colorRValue, (byte) colorGValue,
 					(byte) colorBValue, (byte) 0x80, (byte) 0x80, (byte) 0x80);

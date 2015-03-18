@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Locale;
 
 import com.example.kksmartcontrol.R;
-import com.kksmartcontrol.util.FragmentUtil;
+import com.kksmartcontrol.fragment.util.FragmentUtil;
 import com.kksmartcontrol.util.ToastUtil;
-import com.xlistview.adapter.PlayListAdapter;
-import com.xlistview.handle.CharacterParser;
-import com.xlistview.handle.PinyinComparator;
-import com.xlistview.model.PlayListItemModel;
-import com.xlistview.sidebar.SideBar;
-import com.xlistview.sidebar.SideBar.OnTouchingLetterChangedListener;
-import com.xlistview.xlistview.XListView;
-import com.xlistview.xlistview.XListView.IXListViewListener;
-import com.xml.sax.SaxService;
+import com.kksmartcontrol.adapter.PlayListAdapter;
+import com.kksmartcontrol.util.CharacterParser;
+import com.kksmartcontrol.util.PinyinComparator;
+import com.kksmartcontrol.bean.VideoInfoBean;
+import com.kksmartcontrol.view.xlistview.sidebar.SideBar;
+import com.kksmartcontrol.view.xlistview.sidebar.SideBar.OnTouchingLetterChangedListener;
+import com.kksmartcontrol.view.xlistview.xlistview.XListView;
+import com.kksmartcontrol.view.xlistview.xlistview.XListView.IXListViewListener;
+import com.kksmartcontrol.util.xml.sax.SaxService;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -124,7 +124,7 @@ public class MediaPlayListFragment extends Fragment implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// 这里要利用adapter.getItem(position)来获取当前position所对应的对象
-				ToastUtil.showToast(context, ((PlayListItemModel) adapter
+				ToastUtil.showToast(context, ((VideoInfoBean) adapter
 						.getItem(position - 1)).getName(), Toast.LENGTH_SHORT);
 			}
 		});
@@ -146,33 +146,7 @@ public class MediaPlayListFragment extends Fragment implements
 				DragShadowBuilder myShadow = new DragShadowBuilder(
 						dragView);
 				String localState = "fromListViewItem";
-				// VideoPreFragment videoPreFragment = (VideoPreFragment)
-				// getActivity()
-				// .getFragmentManager().findFragmentByTag(
-				// "VideoPreFragment");
-				// if (videoPreFragment == null)
-				// videoPreFragment = new VideoPreFragment();
-				// android.app.FragmentTransaction fragmentTransaction =
-				// getActivity()
-				// .getFragmentManager().beginTransaction();
-				// VideoPlayFragment videoPlayFragment = (VideoPlayFragment)
-				// getActivity()
-				// .getFragmentManager().findFragmentByTag(
-				// "VideoPlayFragment");
-				// if (videoPreFragment.isAdded()) {
-				// if (videoPreFragment.isHidden()) {
-				// if (videoPlayFragment != null
-				// && videoPlayFragment.isAdded()) {
-				// getActivity().getFragmentManager().popBackStack();
-				// } else {
-				// fragmentTransaction.show(videoPreFragment);
-				// }
-				// }
-				// } else {
-				// fragmentTransaction.add(R.id.displaylayout,
-				// videoPreFragment, "VideoPreFragment");
-				// }
-				// fragmentTransaction.commit();
+
 				FragmentUtil.removeVisibleFragmentByTag(context,
 						"VideoPlayFragment", R.animator.fragmentexit);
 				FragmentUtil.showExistingFragmentByTag(context, "VideoPreFragment");
@@ -220,8 +194,8 @@ public class MediaPlayListFragment extends Fragment implements
 			InputStream inputStream = assetManager.open("videoList.xml");
 
 			// InputStream inputStream = new FileInputStream(path);
-			List<HashMap<String, String>> list = SaxService.readXML(
-					inputStream, "video");
+			List<HashMap<String, String>> list = SaxService.parserXML(
+                    inputStream, "video");
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -235,15 +209,15 @@ public class MediaPlayListFragment extends Fragment implements
 	 *
 	 * @return
 	 */
-	private List<PlayListItemModel> filledData(
+	private List<VideoInfoBean> filledData(
 			List<HashMap<String, String>> videoList) {
 
 		// 汉字转换成拼音的类
 		CharacterParser characterParser = CharacterParser.getInstance();
-		List<PlayListItemModel> mSortList = new ArrayList<PlayListItemModel>();
+		List<VideoInfoBean> mSortList = new ArrayList<VideoInfoBean>();
 
 		for (HashMap<String, String> listItem : videoList) {
-			PlayListItemModel sortModel = new PlayListItemModel();
+			VideoInfoBean sortModel = new VideoInfoBean();
 			String path = listItem.get("path");
 			String fileName = path.substring(path.lastIndexOf("\\") + 1);
 			String time_length = listItem.get("time_length");
@@ -288,9 +262,9 @@ public class MediaPlayListFragment extends Fragment implements
 	}
 
 	class FillListViewTask extends
-			AsyncTask<Void, Void, List<PlayListItemModel>> {
+			AsyncTask<Void, Void, List<VideoInfoBean>> {
 		@Override
-		protected void onPostExecute(List<PlayListItemModel> SourceDataList) {
+		protected void onPostExecute(List<VideoInfoBean> SourceDataList) {
 			// TODO Auto-generated method stub
 			if (adapter == null) {
 				adapter = new PlayListAdapter(context, SourceDataList);
@@ -302,10 +276,10 @@ public class MediaPlayListFragment extends Fragment implements
 		}
 
 		@Override
-		protected List<PlayListItemModel> doInBackground(Void... params) {
+		protected List<VideoInfoBean> doInBackground(Void... params) {
 			// 实例化汉字转拼音类
 			PinyinComparator pinyinComparator = new PinyinComparator();
-			List<PlayListItemModel> SourceDataList = filledData(getListFromXML());
+			List<VideoInfoBean> SourceDataList = filledData(getListFromXML());
 			// 根据a-z进行排序源数据
 			Collections.sort(SourceDataList, pinyinComparator);
 			return SourceDataList;

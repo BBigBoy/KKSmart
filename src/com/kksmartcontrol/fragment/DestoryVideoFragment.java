@@ -1,7 +1,7 @@
 package com.kksmartcontrol.fragment;
 
 import com.example.kksmartcontrol.R;
-import com.kksmartcontrol.prevideoview.MyPreVideoView;
+import com.kksmartcontrol.view.prevideoview.MyPreVideoView;
  
 import android.app.Fragment;
 import android.app.FragmentTransaction;

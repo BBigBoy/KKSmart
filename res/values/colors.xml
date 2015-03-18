@@ -13,8 +13,9 @@
     <color name="color_white">#FFFFFF</color>
     <color name="grey">#808080</color>
     <color name="transparent">#00000000</color>
-    <color name="ivory">#FFFFF0</color>
+    <color name="bgcolor">#68b9f4</color>
     <color name="displaybg">#22292b</color>
+
     <!-- 象牙色 -->
     <color name="thumbnail_fg">#a0000000</color>
     <color name="detail_brief">#ff000000</color>

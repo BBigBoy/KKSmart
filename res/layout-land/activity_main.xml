@@ -13,11 +13,11 @@
         android:background="@color/displaybg"
         android:padding="2dp" >
 
-        <com.kksmartcontrol.pjscreenview.PJScreenView
+        <com.kksmartcontrol.view.pjscreenview.PJScreenView
             android:id="@+id/pjscreenview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-        </com.kksmartcontrol.pjscreenview.PJScreenView>
+        </com.kksmartcontrol.view.pjscreenview.PJScreenView>
     </FrameLayout>
 
     <FrameLayout
@@ -43,7 +43,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="14" />
 
-            <com.kksmartcontrol.pagersliding.PagerSlidingTabStrip
+            <com.kksmartcontrol.view.pagersliding.PagerSlidingTabStrip
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />

@@ -1,14 +1,5 @@
 package com.kksmartcontrol.fragment;
 
-import com.example.kksmartcontrol.R;
-import com.glh.montagecontrol.net.client.NetState;
-import com.kksmartcontrol.activity.MainActivity;
-import com.kksmartcontrol.net.NetWorkObject;
-import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
-import com.kksmartcontrol.netcmd.SetPJ_Infor;
-import com.kksmartcontrol.preference.PreferencesUtils;
-import com.kksmartcontrol.util.PjScreenViewInterface;
-
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,12 +7,21 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+
+import com.example.kksmartcontrol.R;
+import com.glh.montagecontrol.net.client.NetState;
+import com.kksmartcontrol.activity.MainActivity;
+import com.kksmartcontrol.net.NetWorkObject;
+import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
+import com.kksmartcontrol.net.netcmd.SetPJ_Infor;
+import com.kksmartcontrol.preference.PreferencesUtils;
+import com.kksmartcontrol.view.pjscreenview.PJScreenView;
 
 public class AdjustPicModeFragment extends Fragment implements
 		OnSeekBarChangeListener, OnClickListener {
@@ -36,14 +36,14 @@ public class AdjustPicModeFragment extends Fragment implements
 	SeekBar contrastBar;
 	SeekBar toneBar;
 	SeekBar sharpnessBar;
-	PjScreenViewInterface coordinateList;
+	PJScreenView pjScreenView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		context = getActivity();
-		coordinateList = ((MainActivity) getActivity());
+		pjScreenView = ((MainActivity) getActivity()).pjScreenView;
 		View view = inflater.inflate(R.layout.adjustpicmode, container, false);
 		((TextView) view.findViewById(R.id.fragmenttitletext))
 				.setText(getResources().getString(R.string.pic_mode));
@@ -141,22 +141,22 @@ public class AdjustPicModeFragment extends Fragment implements
 				public void run() {
 					// TODO Auto-generated method stub
 					setPj_Infor.setPjFunctionPacket(
-							coordinateList.getCoordinateList(),
+							pjScreenView.getCoordinateList(),
 							SystemFuntion.SET_PICMODE_BRIGHTNESS, (byte) 0x31,
 							(byte) 0x00, (byte) brightnessValue);
 					SystemClock.sleep(300);
 					setPj_Infor.setPjFunctionPacket(
-							coordinateList.getCoordinateList(),
-							SystemFuntion.SET_PICMODE_CONTRAST, (byte) 0x31,
-							(byte) 0x00, (byte) contrastValue);
+                            pjScreenView.getCoordinateList(),
+                            SystemFuntion.SET_PICMODE_CONTRAST, (byte) 0x31,
+                            (byte) 0x00, (byte) contrastValue);
 					SystemClock.sleep(300);
 					setPj_Infor.setPjFunctionPacket(
-							coordinateList.getCoordinateList(),
+							pjScreenView.getCoordinateList(),
 							SystemFuntion.SET_PICMODE_TON, (byte) 0x31,
 							(byte) 0x00, (byte) toneValue);
 					SystemClock.sleep(300);
 					setPj_Infor.setPjFunctionPacket(
-							coordinateList.getCoordinateList(),
+							pjScreenView.getCoordinateList(),
 							SystemFuntion.SET_PICMODE_SHAPNESS, (byte) 0x31,
 							(byte) 0x00, (byte) shapnessValue);
 				}
@@ -182,27 +182,27 @@ public class AdjustPicModeFragment extends Fragment implements
 		// TODO Auto-generated method stub
 		switch (seekBar.getId()) {
 		case R.id.brightnessseekbar:
-			setPj_Infor.setPjFunctionPacket(coordinateList.getCoordinateList(),
+			setPj_Infor.setPjFunctionPacket(pjScreenView.getCoordinateList(),
 					SystemFuntion.SET_PICMODE_BRIGHTNESS, (byte) 0x31,
 					(byte) 0x00, (byte) brightnessValue);
 			Log.i("DialogViewInit", "brightnessseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.contrastseekbar:
-			setPj_Infor.setPjFunctionPacket(coordinateList.getCoordinateList(),
+			setPj_Infor.setPjFunctionPacket(pjScreenView.getCoordinateList(),
 					SystemFuntion.SET_PICMODE_CONTRAST, (byte) 0x31,
 					(byte) 0x00, (byte) contrastValue);
 			Log.i("DialogViewInit", "contrastseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.toneseekbar:
-			setPj_Infor.setPjFunctionPacket(coordinateList.getCoordinateList(),
+			setPj_Infor.setPjFunctionPacket(pjScreenView.getCoordinateList(),
 					SystemFuntion.SET_PICMODE_TON, (byte) 0x31, (byte) 0x00,
 					(byte) toneValue);
 			Log.i("DialogViewInit", "toneseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.sharpnessseekbar:
-			setPj_Infor.setPjFunctionPacket(coordinateList.getCoordinateList(),
-					SystemFuntion.SET_PICMODE_SHAPNESS, (byte) 0x31,
-					(byte) 0x00, (byte) shapnessValue);
+			setPj_Infor.setPjFunctionPacket(pjScreenView.getCoordinateList(),
+                    SystemFuntion.SET_PICMODE_SHAPNESS, (byte) 0x31,
+                    (byte) 0x00, (byte) shapnessValue);
 			Log.i("DialogViewInit", "sharpnessseekbar停止后执行的操作，有待进一步归类");
 			break;
 		default:

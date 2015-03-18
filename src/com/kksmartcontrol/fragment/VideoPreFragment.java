@@ -2,8 +2,8 @@ package com.kksmartcontrol.fragment;
 
 import java.util.HashSet;
 import java.util.Set;
-import com.kksmartcontrol.prevideoview.MyPreVideoView;
-import com.kksmartcontrol.util.FragmentUtil;
+import com.kksmartcontrol.view.prevideoview.MyPreVideoView;
+import com.kksmartcontrol.fragment.util.FragmentUtil;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
