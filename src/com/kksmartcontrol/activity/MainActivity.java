@@ -11,7 +11,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kksmartcontrol.R;
 import com.glh.montagecontrol.net.client.NetState;
@@ -29,16 +28,13 @@ import com.kksmartcontrol.view.pjscreenview.PJScreenView;
 
 public class MainActivity extends FragmentActivity implements
         PagerSlidingTabStrip.RefreshActivity {
-
-    public String TAG = this.getClass().getName();
-    private PagerSlidingTabStrip tabs;
-    private DisplayMetrics displayMetrics;
+    //public String TAG = this.getClass().getName();
+    public PJScreenView pjScreenView;
+    private Handler mHandler = new Handler();
+    ImageView plusIv;
     private TextView titleText;
     ObjectAnimator titleTextAnimator;
-    private Handler mHandler = new Handler();
-    public PJScreenView pjScreenView;
-    ImageView plusImage;
-    ObjectAnimator titleAnimator;
+    ObjectAnimator plusIvAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +46,8 @@ public class MainActivity extends FragmentActivity implements
                 1.0f).setDuration(1300);
         NetWorkObject.context = this;
         Log.i("second", "onCreate");
-        plusImage = (ImageView) findViewById(R.id.plus);
-        titleAnimator = ObjectAnimator.ofFloat(plusImage, "rotation", 0, -45)
+        plusIv = (ImageView) findViewById(R.id.plus);
+        plusIvAnimator = ObjectAnimator.ofFloat(plusIv, "rotation", 0, -45)
                 .setDuration(600);
         pjScreenView = (PJScreenView) findViewById(R.id.pjscreenview);
         pjScreenView.setSplicesMode(KKSmartControlDataBean.getRowNum(),
@@ -59,9 +55,9 @@ public class MainActivity extends FragmentActivity implements
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager()));
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
-        displayMetrics = getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         tabs.setTabsValue(displayMetrics);
     }
 
@@ -72,7 +68,7 @@ public class MainActivity extends FragmentActivity implements
         if (NetWorkObject.getInstance().getNetStatus() != NetState.TCP_CONN_OPEN) {
             showNetErrIndicate();
         } else {
-            ToastUtil.showToast(this, "已连接到服务器 ！", Toast.LENGTH_LONG);
+            ToastUtil.showToast(this, "已连接到服务器 ！", ToastUtil.LENGTH_MEDIUM);
         }
     }
 
@@ -127,13 +123,13 @@ public class MainActivity extends FragmentActivity implements
     public void plusClick(View v) {
         if (!v.isSelected()) {
             v.setSelected(true);
-            titleAnimator.start();
+            plusIvAnimator.start();
             FragmentUtil.addFragmentWithTag(this, PlusFragment.class,
                     R.id.listlayout, "plusFragment",
                     R.animator.plusfragmententer);
         } else {
             v.setSelected(false);
-            titleAnimator.reverse();
+            plusIvAnimator.reverse();
             FragmentUtil.removeFragmentByTag(this, "plusFragment",
                     R.animator.plusfragmentexit);
         }
@@ -142,7 +138,7 @@ public class MainActivity extends FragmentActivity implements
     /**
      * 图像模式设置、背光、色温控制的fragment中的关闭按钮事件
      *
-     * @param v
+     * @param v 图像模式设置、背光、色温控制的fragment中的关闭按钮
      */
     public void onCloseBtnClick(View v) {
         FragmentUtil.removeVisibleFragmentByTag(this,
@@ -192,10 +188,10 @@ public class MainActivity extends FragmentActivity implements
                 // TODO Auto-generated method stub
                 if (position == 1) {
                     titleText.setText("视频播放");
-                    plusImage.setVisibility(View.GONE);
+                    plusIv.setVisibility(View.GONE);
                 } else {
                     titleText.setText("拼接控制");
-                    plusImage.setVisibility(View.VISIBLE);
+                    plusIv.setVisibility(View.VISIBLE);
                 }
                 titleTextAnimator.start();
             }
@@ -225,9 +221,9 @@ public class MainActivity extends FragmentActivity implements
                             getResources().getString(R.string.manualsetting),
                             R.animator.fragmentexit))
                 return false;
-            if (plusImage.isSelected()) {
-                plusImage.setSelected(false);
-                titleAnimator.reverse();
+            if (plusIv.isSelected()) {
+                plusIv.setSelected(false);
+                plusIvAnimator.reverse();
                 FragmentUtil.removeFragmentByTag(this, "plusFragment",
                         R.animator.plusfragmentexit);
                 return false;
@@ -235,10 +231,8 @@ public class MainActivity extends FragmentActivity implements
             // displayDialog(context, R.layout.exitpopdialog);
             //new ExitDialog().show(getFragmentManager(), "Exit");
             long mNowTime = System.currentTimeMillis();//获取第一次按键时间
-            if ((mNowTime - mPressedTime) > 1000) {//比较两次按键时间差
-                //  Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-
-                ToastUtil.showToast(this, "再按一次退出程序", 500);
+            if ((mNowTime - mPressedTime) > 800) {//比较两次按键时间差
+                ToastUtil.showToast(this, "再按一次退出程序", 800);
                 mPressedTime = mNowTime;
             } else {//退出程序
                 this.finish();

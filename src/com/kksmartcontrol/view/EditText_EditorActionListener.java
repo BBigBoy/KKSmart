@@ -40,16 +40,16 @@ public class EditText_EditorActionListener implements OnEditorActionListener {
                 }
                 myEditText.setText(String.valueOf(num));
                 ToastUtil.showToast(context, "行数与列数最大为10,\n\n已设置为尾数   " + num
-                        + "   ！", Toast.LENGTH_SHORT);
+                        + "   ！", ToastUtil.LENGTH_SHORT);
             } else if (num < 1) {
                 myEditText.setText(String.valueOf(2));
                 ToastUtil.showToast(context, "行数与列数不可小于1,\n\n已设置为默认值   " + 2
-                        + "   ！", Toast.LENGTH_SHORT);
+                        + "   ！", ToastUtil.LENGTH_SHORT);
             }
         } else {
             myEditText.setText("2");
             ToastUtil.showToast(context, "行数与列数不可为空,\n\n已设置为默认值   2   ！",
-                    Toast.LENGTH_SHORT);
+                    ToastUtil.LENGTH_SHORT);
         }
         myEditText.setSelection(myEditText.getText().length());
         int num = Integer.parseInt(myEditText.getText().toString());

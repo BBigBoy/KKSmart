@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.kksmartcontrol.R;
 import com.glh.montagecontrol.net.client.NetState;
@@ -89,11 +88,11 @@ public class ControlSettingFragment extends Fragment implements OnClickListener 
 		// 每次点击按钮均判断网络是否连接正常
 		if (NetWorkObject.getInstance().getNetStatus() != NetState.TCP_CONN_OPEN) {
 			ToastUtil
-					.showToast(context, "当前未与服务器正常连接，请连接！", Toast.LENGTH_SHORT);
+					.showToast(context, "当前未与服务器正常连接，请连接！", ToastUtil.LENGTH_SHORT);
 			return;
 		}
 		if (pjScreenView.isSelectListEmpty()) {
-			ToastUtil.showToast(context, "请选择需要设置的屏幕", Toast.LENGTH_SHORT);
+			ToastUtil.showToast(context, "请选择需要设置的屏幕", ToastUtil.LENGTH_SHORT);
 			return;
 		}
 		switch (view.getId()) {

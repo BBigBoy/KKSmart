@@ -92,7 +92,7 @@ public class PlusFloatWindow extends LinearLayout {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ToastUtil.showToast(context, "用来进行应用基础设置....",
-						Toast.LENGTH_LONG);
+						ToastUtil.LENGTH_MEDIUM);
 				floatView.setVisibility(View.VISIBLE);
 				floatView.setSelected(false);
 				mParams.width = expandFloatView.getWidth() / 3;

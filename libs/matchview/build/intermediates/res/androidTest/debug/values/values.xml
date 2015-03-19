@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="match"><attr format="string" name="text"/><attr format="color" name="textColor"/><attr format="dimension" name="textSize"/></declare-styleable>
-    <!-- From: file:/E:/GitHubPath/Android%20Studio%20Project/KKSmart/libs/matchview/build/intermediates/bundles/debug/res/values/values.xml -->
-    <eat-comment/>
-    <string name="app_name">library</string>
-</resources>

@@ -125,7 +125,7 @@ public class MediaPlayListFragment extends Fragment implements
 					int position, long id) {
 				// 这里要利用adapter.getItem(position)来获取当前position所对应的对象
 				ToastUtil.showToast(context, ((VideoInfoBean) adapter
-						.getItem(position - 1)).getName(), Toast.LENGTH_SHORT);
+						.getItem(position - 1)).getName(), ToastUtil.LENGTH_SHORT);
 			}
 		});
 		playListView.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -180,7 +180,7 @@ public class MediaPlayListFragment extends Fragment implements
 			@Override
 			public void run() {
 				// getData();
-				ToastUtil.showToast(context, "上拉刷新在这里更新数据", Toast.LENGTH_LONG);
+				ToastUtil.showToast(context, "上拉刷新在这里更新数据", ToastUtil.LENGTH_MEDIUM);
 				stopLoad();
 			}
 		}, 1000);

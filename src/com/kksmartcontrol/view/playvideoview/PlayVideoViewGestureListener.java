@@ -33,7 +33,7 @@ public class PlayVideoViewGestureListener extends
 		// TODO Auto-generated method stub
 		super.onLongPress(e);
 		ToastUtil.showToast(videoView.getContext(), "双击或滑动以返回预览窗口",
-				Toast.LENGTH_LONG);
+				ToastUtil.LENGTH_MEDIUM);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class PlayVideoViewGestureListener extends
 		// TODO Auto-generated method stub
 		// Log.d("onSingleTapConfirmed", "onSingleTapConfirmed");
 		// ToastUtil.showToast(videoView.getContext(), "双击或滑动以返回预览窗口",
-		// Toast.LENGTH_LONG).show();
+		// ToastUtil.LENGTH_MEDIUM).show();
 		return true;
 	}
 
@@ -58,7 +58,7 @@ public class PlayVideoViewGestureListener extends
 		// videoView.getContext()).getFragmentManager().popBackStack(
 		// "VideoPlay", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		// ToastUtil.showToast(videoView.getContext(), "当前播放",
-		// Toast.LENGTH_SHORT);
+		// ToastUtil.LENGTH_SHORT);
 		return true;
 	}
 }

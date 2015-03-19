@@ -34,7 +34,7 @@ public class PreVideoViewGestureListener extends
 
 		if (videoView.getContentDescription() == null) {
 			ToastUtil.showToast(videoView.getContext(), "当前无预览内容,无需移除 ！",
-					Toast.LENGTH_SHORT);
+					ToastUtil.LENGTH_SHORT);
 			return;
 		}
 
@@ -72,10 +72,10 @@ public class PreVideoViewGestureListener extends
 		Log.d("onSingleTapConfirmed", "onSingleTapConfirmed");
 		if (videoView.getContentDescription() != null) {
 			ToastUtil.showToast(videoView.getContext(), " 双击以确定播放  "
-					+ videoView.getContentDescription(), Toast.LENGTH_SHORT);
+					+ videoView.getContentDescription(), ToastUtil.LENGTH_SHORT);
 		} else {
 			ToastUtil.showToast(videoView.getContext(), "当前窗口无播放预览",
-					Toast.LENGTH_SHORT);
+					ToastUtil.LENGTH_SHORT);
 		}
 		return true;
 	}
@@ -117,7 +117,7 @@ public class PreVideoViewGestureListener extends
 
 		} else {
 			ToastUtil.showToast(videoView.getContext(), "当前窗口无播放预览,请先添加预览视频",
-					Toast.LENGTH_SHORT);
+					ToastUtil.LENGTH_SHORT);
 		}
 		return true;
 	}
